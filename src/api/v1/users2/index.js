@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const validator = require("uuid").validate;
 const users = require("../../../models/users2");
+const bans = require("../../../models/bans");
 const cors = require("cors");
 
 const secrets = require("../../../secrets.json");
@@ -23,6 +24,9 @@ router.get("/deleteall", async (req, res, nect) => {
 });
 
 router.all("/leader", async (req, res, next) => {
+  const all_bans = await bans.find();
+  let bans_arr = [];
+  bans_arr = all_bans.map((e) => e._id);
   const all_users = await users.find();
   const all_levels = all_users
     .map((e) => ({
@@ -32,8 +36,20 @@ router.all("/leader", async (req, res, next) => {
         e.multiplierLevel * 1 +
         (e.goldenBienens ? e.goldenBienens : 0) * 10000,
     }))
+    .filter((e) => !bans_arr.includes(e.user._id))
     .sort((a, b) => b.level - a.level);
   res.send(all_levels);
+});
+
+router.all("/ban/:id", async (req, res, next) => {
+  const userid = req.params.id;
+  const ban = await bans.findById(userid);
+  if (ban) {
+    res.status(200);
+    res.send({ status: "ok", result: ban });
+  } else {
+    res.send({ status: "fail" });
+  }
 });
 
 router.all("/update2", async (req, res, next) => {
