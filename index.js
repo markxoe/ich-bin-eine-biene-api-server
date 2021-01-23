@@ -22,7 +22,7 @@ app.use(morgan("combined"));
 
 app.get("/", (req, res, next) => {
   res.send(
-    "Die API ist nichts für kleine Kinder, aber scheue nicht kontakt mit dem Entwickler aufzunehmen"
+    "Die API ist nichts für kleine Kinder, aber scheue nicht Kontakt mit dem Entwickler aufzunehmen"
   );
 });
 
