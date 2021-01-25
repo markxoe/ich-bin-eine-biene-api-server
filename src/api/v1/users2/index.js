@@ -98,6 +98,10 @@ router.all("/update2", async (req, res, next) => {
             settingClickingAid: req.body.settingClickingAid,
             userImage: req.body.userImage,
             goldenBienens: req.body.goldenBienens ? req.body.goldenBienens : 0,
+            level:
+              req.body.additionalBeeLength * 3 +
+              req.body.multiplierLevel * 1 +
+              (req.body.goldenBienens ? req.body.goldenBienens : 0) * 10000,
           },
           { upsert: true }
         );

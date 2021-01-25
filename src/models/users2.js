@@ -12,6 +12,7 @@ const usersv12 = mongoose.model(
     settingClickingAid: Boolean,
     userImage: String,
     goldenBienens: Number,
+    level: Number,
   })
 );
 
