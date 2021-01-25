@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const validator = require("uuid").validate;
 const users = require("../../../models/users2");
+const userWarnings = require("../../../models/userwarnings");
 const bans = require("../../../models/bans");
 const cors = require("cors");
 
@@ -47,6 +48,17 @@ router.all("/ban/:id", async (req, res, next) => {
   if (ban) {
     res.status(200);
     res.send({ status: "ok", result: ban });
+  } else {
+    res.send({ status: "fail" });
+  }
+});
+
+router.all("/warning/:id", async (req, res, next) => {
+  const userid = req.params.id;
+  const warning = await userWarnings.findById(userid).exec();
+  if (warning) {
+    res.status(200);
+    res.send({ status: "ok", result: warning.message });
   } else {
     res.send({ status: "fail" });
   }
