@@ -102,6 +102,8 @@ router.all("/update2", async (req, res, next) => {
               req.body.additionalBeeLength * 3 +
               req.body.multiplierLevel * 1 +
               (req.body.goldenBienens ? req.body.goldenBienens : 0) * 10000,
+            appVersion: req.header("version"),
+            platforms: req.header("platforms"),
           },
           { upsert: true }
         );

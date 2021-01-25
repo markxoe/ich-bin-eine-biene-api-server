@@ -13,6 +13,8 @@ const usersv12 = mongoose.model(
     userImage: String,
     goldenBienens: Number,
     level: Number,
+    appVersion: String,
+    platforms: String,
   })
 );
 
