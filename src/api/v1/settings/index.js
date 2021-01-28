@@ -2,7 +2,7 @@ const router = require("express").Router();
 
 const Settings = require("../../../models/settings");
 
-const secrets = require("../../../secrets.json");
+const secrets = require("../../../secrets");
 const { response } = require("express");
 
 router.get("/get", async (req, res, next) => {

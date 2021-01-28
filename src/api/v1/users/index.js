@@ -3,7 +3,7 @@ const validator = require("uuid").validate;
 const users = require("./../../../models/users");
 const cors = require("cors");
 
-const secrets = require("../../../secrets.json");
+const secrets = require("../../../secrets");
 
 router.use(require("body-parser").json());
 

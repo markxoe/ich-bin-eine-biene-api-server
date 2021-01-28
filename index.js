@@ -13,6 +13,16 @@ if (process.env.mongouri == undefined) {
   throw Error("No MongoURI set");
 }
 
+const secrets = require("./src/secrets");
+if (
+  secrets.deleteApiKey == undefined ||
+  secrets.insertApiKey == undefined ||
+  secrets.usersApiSecret == undefined
+) {
+  console.log("Secret Missing");
+  throw Error("Secret Missing");
+}
+
 mongoose.connect(process.env.mongouri, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
