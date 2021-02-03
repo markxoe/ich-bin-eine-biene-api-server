@@ -63,7 +63,7 @@ router.post("/", async (req, res, next) => {
             level:
               _out.additionalBeeLength * 3 +
               _out.multiplierLevel * 1 +
-              _out.goldenBienens * 10000,
+              _out.goldenBienens * 100000,
             appVersion: req.header("version"),
             platforms: req.header("platforms"),
           },

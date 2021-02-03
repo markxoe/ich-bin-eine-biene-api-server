@@ -35,7 +35,7 @@ router.all("/leader", async (req, res, next) => {
       level:
         e.additionalBeeLength * 3 +
         e.multiplierLevel * 1 +
-        (e.goldenBienens ? e.goldenBienens : 0) * 10000,
+        (e.goldenBienens ? e.goldenBienens : 0) * 100000,
     }))
     .filter((e) => !bans_arr.includes(e.user._id))
     .sort((a, b) => b.level - a.level);
@@ -101,7 +101,7 @@ router.all("/update2", async (req, res, next) => {
             level:
               req.body.additionalBeeLength * 3 +
               req.body.multiplierLevel * 1 +
-              (req.body.goldenBienens ? req.body.goldenBienens : 0) * 10000,
+              (req.body.goldenBienens ? req.body.goldenBienens : 0) * 100000,
             appVersion: req.header("version"),
             platforms: req.header("platforms"),
           },
