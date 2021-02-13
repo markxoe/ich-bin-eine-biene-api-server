@@ -28,17 +28,13 @@ router.all("/leader", async (req, res, next) => {
   const all_bans = await bans.find();
   let bans_arr = [];
   bans_arr = all_bans.map((e) => e._id);
-  const all_users = await users.find();
+  const all_users = await users.find().sort({ level: "desc" });
   const all_levels = all_users
     .map((e) => ({
       user: e,
-      level:
-        e.additionalBeeLength * 3 +
-        e.multiplierLevel * 1 +
-        (e.goldenBienens ? e.goldenBienens : 0) * 100000,
+      level: e.level,
     }))
-    .filter((e) => !bans_arr.includes(e.user._id))
-    .sort((a, b) => b.level - a.level);
+    .filter((e) => !bans_arr.includes(e.user._id));
   res.send(all_levels);
 });
 
