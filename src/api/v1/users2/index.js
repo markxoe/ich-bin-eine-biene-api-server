@@ -38,6 +38,21 @@ router.all("/leader", async (req, res, next) => {
   res.send(all_levels);
 });
 
+router.all("/leader2", async (req, res, next) => {
+  const all_bans = await bans.find();
+  let bans_arr = [];
+  bans_arr = all_bans.map((e) => e._id);
+  const all_users = await users.find().sort({ level: "desc" });
+  const all_levels = all_users
+    .map((e) => ({
+      user: e,
+      level: e.level,
+    }))
+    .filter((e) => !bans_arr.includes(e.user._id));
+  const all_users_count = await users.find().count();
+  res.send({ status: "ok", users: all_levels, count: all_users_count });
+});
+
 router.all("/ban/:id", async (req, res, next) => {
   const userid = req.params.id;
   const ban = await bans.findById(userid);
