@@ -15,6 +15,7 @@ const usersv12 = mongoose.model(
     level: Number,
     appVersion: String,
     platforms: String,
+    dragons: Number,
   })
 );
 

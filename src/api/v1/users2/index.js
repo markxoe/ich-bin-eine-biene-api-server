@@ -115,6 +115,7 @@ router.all("/update2", async (req, res, next) => {
               (req.body.goldenBienens ? req.body.goldenBienens : 0) * 100000,
             appVersion: req.header("version"),
             platforms: req.header("platforms"),
+            dragons: req.body.dragons,
           },
           { upsert: true }
         );
