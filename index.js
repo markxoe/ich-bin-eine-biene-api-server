@@ -8,6 +8,10 @@ const apiHandler = require("./src/api/index");
 
 const morgan = require("morgan");
 
+const cron = require("cron");
+
+let cronTasks = [require("./src/tasks/usersdelete")];
+
 if (process.env.mongouri == undefined) {
   console.log("Error: No MongoURI set");
   throw Error("No MongoURI set");
@@ -41,3 +45,10 @@ app.use("/api", apiHandler);
 app.listen(4000, () => {
   console.log("Listening for clients lol");
 });
+
+console.log("Starting and Firing Crontabs");
+cronTasks.forEach((i) => {
+  i.start();
+  i.fireOnTick();
+});
+console.log("Done starting Cronjobs");
